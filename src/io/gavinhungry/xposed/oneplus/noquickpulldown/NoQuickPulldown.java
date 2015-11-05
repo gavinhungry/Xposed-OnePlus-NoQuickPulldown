@@ -5,25 +5,31 @@ import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedHelpers;
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
+import android.os.Build;
 import android.view.MotionEvent;
 
 public class NoQuickPulldown implements IXposedHookLoadPackage {
+
+  private static final String qsExpandFieldName = Build.VERSION.SDK_INT == 21 ? "mTwoFingerQsExpand" : "mQsExpandImmediate";
+
   public void handleLoadPackage(final LoadPackageParam lpparam) throws Throwable {
-
-    XposedBridge.log("OP2 handleLoadPackage: " + lpparam.packageName);
-
     if (lpparam.packageName.equals("com.android.systemui")) {
+
       try {
-        findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelView", lpparam.classLoader,
-          "onTouchEvent", MotionEvent.class, XC_MethodReplacement.DO_NOTHING);
+        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelView", lpparam.classLoader,
+          "onTouchEvent", MotionEvent.class, new XC_MethodHook() {
+
+          @Override
+          protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+            XposedHelpers.setBooleanField(param.thisObject, qsExpandFieldName, false);
+          }
+        });
+
       } catch (Throwable t) {
-        XposedBridge.log("OP2 Error!");
+        XposedBridge.log(t);
       }
     }
-
   }
 }
