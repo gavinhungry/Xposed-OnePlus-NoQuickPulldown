@@ -5,9 +5,15 @@ also disables two-finger quick pulldown.
 
 Tested on OnePlus 2, but may work with other OxygenOS devices.
 
+Build
+-----
+
+    $ ant build
+
 Install
 -------
-See `dist/NoQuickPulldown.apk`.
+
+    $ adb install dist/NoQuickPulldown.apk
 
 License
 -------
