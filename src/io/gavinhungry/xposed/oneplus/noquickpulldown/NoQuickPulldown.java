@@ -3,7 +3,6 @@ package io.gavinhungry.xposed.oneplus.noquickpulldown;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 
@@ -16,8 +15,8 @@ public class NoQuickPulldown implements IXposedHookLoadPackage {
 
   public void handleLoadPackage(final LoadPackageParam lpparam) throws Throwable {
     if (lpparam.packageName.equals("com.android.systemui")) {
-
       try {
+
         XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelView", lpparam.classLoader,
           "onTouchEvent", MotionEvent.class, new XC_MethodHook() {
 
@@ -27,7 +26,7 @@ public class NoQuickPulldown implements IXposedHookLoadPackage {
           }
         });
 
-      } catch (Throwable t) {
+      } catch(Throwable t) {
         XposedBridge.log(t);
       }
     }
