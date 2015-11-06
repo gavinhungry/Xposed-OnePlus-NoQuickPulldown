@@ -6,7 +6,11 @@
   <loadproperties srcFile="project.properties" />
   <import file="${sdk.dir}/tools/ant/build.xml" />
 
-  <target name="build" depends="clean,debug" description="build project">
+  <target name="-pre-clean" description="pre-clean project">
+    <delete dir="res" />
+  </target>
+
+  <target name="build" depends="clean, debug" description="build project">
     <move file="bin/${ant.project.name}-debug.apk" tofile="dist/${ant.project.name}.apk" />
   </target>
 </project>
