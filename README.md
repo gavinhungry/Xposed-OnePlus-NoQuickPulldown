@@ -1,4 +1,4 @@
-OnePlus-Xposed-NoQuickPulldown
+Xposed-OnePlus-NoQuickPulldown
 ==============================
 Xposed module to disable the Notification Panel quick pulldown on OxygenOS. This
 also disables two-finger quick pulldown.
