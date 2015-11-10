@@ -7,6 +7,7 @@
   <import file="${sdk.dir}/tools/ant/build.xml" />
 
   <target name="-pre-clean" description="pre-clean project">
+    <delete dir="dist" />
     <delete dir="res" />
   </target>
 
