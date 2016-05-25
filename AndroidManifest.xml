@@ -15,6 +15,6 @@
       android:value="Disable Notification Panel quick pulldown (OxygenOS)" />
     <meta-data
       android:name="xposedminversion"
-      android:value="54" />
+      android:value="82" />
   </application>
 </manifest>
